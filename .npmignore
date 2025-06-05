@@ -1,0 +1,21 @@
+# Demo files
+demo/
+index.html
+
+# Source control
+.git/
+.gitignore
+
+# GitHub workflows
+.github/
+
+# Development files
+.DS_Store
+*.log
+node_modules/
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo

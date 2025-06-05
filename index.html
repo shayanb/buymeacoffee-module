@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Donation Modal Module</title>
+  <meta name="description" content="A lightweight, customizable donation modal component for Ethereum, Bitcoin, and Buy Me a Coffee integration">
+  <meta name="keywords" content="donation, modal, cryptocurrency, ethereum, bitcoin, buymeacoffee, payment, web-component">
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      margin: 0;
+      padding: 40px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #333;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: white;
+      padding: 50px;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    }
+    
+    .header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+    
+    h1 {
+      color: #F26D5B;
+      margin-bottom: 15px;
+      font-size: 3rem;
+      font-weight: 600;
+    }
+    
+    .subtitle {
+      color: #666;
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+    }
+    
+    .cta-buttons {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 50px;
+    }
+    
+    .btn {
+      padding: 15px 30px;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-block;
+      text-align: center;
+    }
+    
+    .primary-btn {
+      background-color: #F26D5B;
+      color: white;
+    }
+    
+    .primary-btn:hover {
+      background-color: #d95b4b;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(242, 109, 91, 0.4);
+    }
+    
+    .secondary-btn {
+      background-color: #667eea;
+      color: white;
+    }
+    
+    .secondary-btn:hover {
+      background-color: #5a6fd8;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+    }
+    
+    .outline-btn {
+      background-color: transparent;
+      color: #F26D5B;
+      border: 2px solid #F26D5B;
+    }
+    
+    .outline-btn:hover {
+      background-color: #F26D5B;
+      color: white;
+      transform: translateY(-3px);
+    }
+    
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      margin-bottom: 50px;
+    }
+    
+    .feature {
+      text-align: center;
+      padding: 30px 20px;
+      background: #f8f9ff;
+      border-radius: 15px;
+      transition: transform 0.3s ease;
+    }
+    
+    .feature:hover {
+      transform: translateY(-5px);
+    }
+    
+    .feature-icon {
+      font-size: 3rem;
+      margin-bottom: 15px;
+    }
+    
+    .feature h3 {
+      color: #333;
+      margin-bottom: 10px;
+    }
+    
+    .feature p {
+      color: #666;
+      font-size: 0.9rem;
+    }
+    
+    .installation {
+      background: #f8f9ff;
+      padding: 40px;
+      border-radius: 15px;
+      margin-bottom: 40px;
+    }
+    
+    .installation h2 {
+      color: #333;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    
+    .code-tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid #ddd;
+    }
+    
+    .tab-btn {
+      padding: 10px 20px;
+      border: none;
+      background: none;
+      color: #666;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: all 0.3s ease;
+    }
+    
+    .tab-btn.active {
+      color: #F26D5B;
+      border-bottom-color: #F26D5B;
+    }
+    
+    .code-block {
+      background-color: #2d3748;
+      color: #e2e8f0;
+      border-radius: 10px;
+      padding: 20px;
+      font-family: 'Courier New', monospace;
+      font-size: 14px;
+      overflow-x: auto;
+      display: none;
+    }
+    
+    .code-block.active {
+      display: block;
+    }
+    
+    .footer {
+      text-align: center;
+      margin-top: 50px;
+      padding-top: 30px;
+      border-top: 1px solid #e0e0e0;
+      color: #666;
+    }
+    
+    .links {
+      display: flex;
+      gap: 30px;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    
+    .link {
+      color: #F26D5B;
+      text-decoration: none;
+      font-weight: 500;
+      transition: opacity 0.3s ease;
+    }
+    
+    .link:hover {
+      opacity: 0.8;
+    }
+    
+    /* Dark mode support */
+    @media (prefers-color-scheme: dark) {
+      body {
+        background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
+      }
+      
+      .container {
+        background: #1a202c;
+        color: #e2e8f0;
+      }
+      
+      .subtitle {
+        color: #a0aec0;
+      }
+      
+      .feature {
+        background: #2d3748;
+      }
+      
+      .feature h3 {
+        color: #e2e8f0;
+      }
+      
+      .feature p {
+        color: #a0aec0;
+      }
+      
+      .installation {
+        background: #2d3748;
+      }
+      
+      .installation h2 {
+        color: #e2e8f0;
+      }
+      
+      .tab-btn {
+        color: #a0aec0;
+      }
+      
+      .footer {
+        border-top-color: #4a5568;
+        color: #a0aec0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Donation Modal</h1>
+      <p class="subtitle">A lightweight, customizable donation modal for cryptocurrency and Buy Me a Coffee integration</p>
+      
+      <div class="cta-buttons">
+        <a href="./demo/" class="btn primary-btn">Live Demo</a>
+        <a href="https://github.com/shayanb/buymeacoffee-module" class="btn secondary-btn">View on GitHub</a>
+        <button id="try-demo" class="btn outline-btn">Try It Now</button>
+      </div>
+    </div>
+    
+    <div class="features">
+      <div class="feature">
+        <div class="feature-icon">🎨</div>
+        <h3>Clean Design</h3>
+        <p>Modern, responsive design with automatic dark mode support</p>
+      </div>
+      
+      <div class="feature">
+        <div class="feature-icon">💰</div>
+        <h3>Crypto Support</h3>
+        <p>Ethereum, Bitcoin, and other cryptocurrency addresses</p>
+      </div>
+      
+      <div class="feature">
+        <div class="feature-icon">☕</div>
+        <h3>Buy Me a Coffee</h3>
+        <p>Seamless integration with Buy Me a Coffee platform</p>
+      </div>
+      
+      <div class="feature">
+        <div class="feature-icon">📱</div>
+        <h3>Mobile Ready</h3>
+        <p>Fully responsive and touch-friendly interface</p>
+      </div>
+      
+      <div class="feature">
+        <div class="feature-icon">🔲</div>
+        <h3>QR Codes</h3>
+        <p>Automatic QR code generation for easy mobile payments</p>
+      </div>
+      
+      <div class="feature">
+        <div class="feature-icon">⚡</div>
+        <h3>Zero Dependencies</h3>
+        <p>Lightweight with on-demand loading of required libraries</p>
+      </div>
+    </div>
+    
+    <div class="installation">
+      <h2>Quick Start</h2>
+      
+      <div class="code-tabs">
+        <button class="tab-btn active" onclick="showTab('npm')">NPM</button>
+        <button class="tab-btn" onclick="showTab('cdn')">CDN</button>
+        <button class="tab-btn" onclick="showTab('download')">Download</button>
+      </div>
+      
+      <div id="npm-code" class="code-block active">
+# Install from GitHub Packages
+npm install @shayan/buymeacoffee-module
+
+# Or install directly from GitHub
+npm install shayanb/buymeacoffee-module
+      </div>
+      
+      <div id="cdn-code" class="code-block">
+&lt;!-- Include via CDN --&gt;
+&lt;script src="https://cdn.jsdelivr.net/gh/shayanb/buymeacoffee-module@main/donation-modal.min.js"&gt;&lt;/script&gt;
+
+&lt;script&gt;
+  const modal = new DonationModal({
+    ethAddress: 'your-eth-address',
+    buyMeCoffeeUrl: 'https://buymeacoffee.com/yourname'
+  });
+  modal.init();
+&lt;/script&gt;
+      </div>
+      
+      <div id="download-code" class="code-block">
+# Clone the repository
+git clone https://github.com/shayanb/buymeacoffee-module.git
+
+# Or download the minified file directly
+wget https://raw.githubusercontent.com/shayanb/buymeacoffee-module/main/donation-modal.min.js
+      </div>
+    </div>
+    
+    <div class="footer">
+      <div class="links">
+        <a href="https://github.com/shayanb/buymeacoffee-module" class="link">GitHub</a>
+        <a href="https://www.npmjs.com/package/@shayan/buymeacoffee-module" class="link">NPM</a>
+        <a href="./demo/" class="link">Documentation</a>
+        <a href="https://github.com/shayanb/buymeacoffee-module/issues" class="link">Issues</a>
+      </div>
+      <p>MIT License • Made with ❤️ by Shayan</p>
+    </div>
+  </div>
+  
+  <!-- Include the donation modal for demo -->
+  <script src="donation-modal.min.js"></script>
+  <script>
+    // Demo modal
+    const demoModal = new DonationModal({
+      ethAddress: '0x5214e7601682dEE3397666b8bBaeDBD682d19186',
+      btcAddress: '3BHETs8Fby8RmYhuqQqFBLfc7vMYD1R1mA',
+      buyMeCoffeeUrl: 'https://buymeacoffee.com/example',
+      modalTitle: 'Support the Donation Modal Project',
+      modalDescription: 'This modal is a demonstration of the donation modal module. Your support helps keep open source projects like this alive!'
+    });
+    
+    demoModal.init();
+    demoModal.attachToTrigger(document.getElementById('try-demo'));
+    
+    // Tab switching
+    function showTab(tabName) {
+      // Hide all code blocks
+      document.querySelectorAll('.code-block').forEach(block => {
+        block.classList.remove('active');
+      });
+      
+      // Remove active class from all tabs
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      
+      // Show selected code block
+      document.getElementById(tabName + '-code').classList.add('active');
+      
+      // Add active class to clicked tab
+      event.target.classList.add('active');
+    }
+  </script>
+</body>
+</html>

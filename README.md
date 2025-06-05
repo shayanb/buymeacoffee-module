@@ -14,6 +14,32 @@ A lightweight, customizable donation modal component that supports cryptocurrenc
 - 🔧 Easy to customize and integrate
 - ♿ Keyboard accessible
 
+## Installation
+
+### NPM (Recommended)
+
+Install from GitHub Packages:
+
+```bash
+npm install @shayan/buymeacoffee-module
+```
+
+Or install directly from GitHub:
+
+```bash
+npm install shayanb/buymeacoffee-module
+```
+
+### CDN
+
+```html
+<script src="https://cdn.jsdelivr.net/gh/shayanb/buymeacoffee-module@main/donation-modal.min.js"></script>
+```
+
+### Download
+
+Download the `donation-modal.min.js` file directly from the [releases page](https://github.com/shayanb/buymeacoffee-module/releases).
+
 ## Quick Start
 
 ### Option 1: Single File (Recommended)
