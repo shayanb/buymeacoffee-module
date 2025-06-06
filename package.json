@@ -1,5 +1,5 @@
 {
-  "name": "@shayan/buymeacoffee-module",
+  "name": "@shayanb/buymeacoffee-module",
   "version": "1.0.0",
   "description": "A lightweight, customizable donation modal component that supports cryptocurrency addresses (Ethereum/Bitcoin) and Buy Me a Coffee integration",
   "main": "donation-modal.min.js",
